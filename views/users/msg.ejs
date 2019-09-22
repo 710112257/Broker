@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<%-include('header.ejs')-%>
+
+<body class="user-select">
+    <section class="container-fluid">
+        <%-include('header-list.ejs')-%>
+        <div class="row">
+            <%-include('sidebar.ejs')-%>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
+                <div class="container">
+                    <div class="login alert alert-<%=tips%>" role="alert">
+                        <p>
+                            <%= msg %>，<span id="times">2</span>秒后跳转到<a href="<%= nextPageUrl %>">
+                                <%= nextPageName %></a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<script>
+
+        //下面是定时跳转的实现
+        var timer = -1;
+        function clock() {
+            var time = parseInt($('#times').text());
+            time--
+            $('#times').text(time);
+            if (time == 0) {
+                clearInterval(timer);
+                window.location.href = "<%= nextPageUrl %>";
+            }
+        }
+        timer = setInterval(clock, 1000);
+    
+    </script>
+</html>

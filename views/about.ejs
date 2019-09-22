@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%-include('header.ejs')-%>
+
+    <body>
+      <%-include('header-list.ejs')-%>
+    <article>
+      <h1 class="t_nav"><span>讲述一些关于我自己的经历......</span><a href="/" class="n1">网站首页</a><a href="/" class="n2">关于我</a></h1>
+      <div class="ab_box">
+        <div class="leftbox">
+          <div class="newsview">
+            <div class="news_infos">
+              <p><%= myself.experience %></p>
+              <h2>About my blog</h2>
+              &nbsp;
+              <p>域 名：www.yangqq.com 创建于2011年01月12日&nbsp;</p>
+              <br />
+              <p>服务器：阿里云服务器&nbsp;&nbsp;<a href="https://promotion.aliyun.com/ntms/act/ambassador/sharetouser.html?userCode=8smrzoqa&amp;productCode=vm" target="_blank"><span style="color:#FF0000;"><strong>前往阿里云官网购买&gt;&gt;</strong></span></a></p>
+              <br />
+              <p>备案号：蜀ICP备11002373号-1</p>
+              <br />
+              <p>程 序：PHP 帝国CMS7.5</p>
+            </div>
+          </div>
+        </div>
+        <div class="rightbox">
+            <%-include('about-me.ejs')-%>
+          <div class="weixin">
+            <h2 class="hometitle">微信关注</h2>
+            <ul>
+              <img src="images/wx.jpg">
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+    <footer>
+      <p>Design by <a href="/">杨青个人博客</a> <a href="/">蜀ICP备11002373号-1</a></p>
+    </footer>
+    <script src="javascripts/nav.js"></script>
+    </body>
+    </html>
+    

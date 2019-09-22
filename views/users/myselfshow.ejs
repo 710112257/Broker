@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<%-include('header.ejs')-%>
+<link rel="stylesheet" href="/stylesheets/users/meselfinfo.css">
+
+<body class="user-select">
+  <section class="container-fluid">
+    <%-include('header-list.ejs')-%>
+    <div class="row">
+      <%-include('sidebar.ejs')-%>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
+        <h1 class="page-header">个人信息中心 </h1>
+        <!--错误警告框-->
+        <div class="alert alert-danger alert-dismissible" style="display: none;" id="uploadMsg">请选择一张图片
+        </div>
+
+
+        <div><img src="/users-imgs/<%= img %>" alt="" srcset="" style="width:200px;height:200px;"></div>
+        <table class="table table-striped ">
+          <caption>
+            博主详情信息--------><a href="/users/myselfinfo/myselfedit">点击前往修改</a>
+          </caption>
+
+          <tr>
+            <td class="" style="width:100px">网名:</td>
+            <td class="">
+              <%= onlinename %>
+            </td>
+          </tr>
+          <tr>
+            <td class="">性别:</td>
+            <td class="">
+              <%= sex %>
+            </td>
+          </tr>
+          <tr>
+            <td class="">职业:</td>
+            <td class="">
+              <%= profess %>
+            </td>
+          </tr>
+          <tr>
+            <td class="">个人微信号:</td>
+            <td class="">
+              <%= wechatNumber %>
+            </td>
+          </tr>
+          <tr>
+            <td class="">邮箱:</td>
+            <td class="">
+              <%= email %>
+            </td>
+          </tr>
+          <tr>
+            <td class="">个人简介:</td>
+            <td class="">
+              <%= myselfsimple %>
+            </td>
+          </tr>
+          <tr>
+            <td class="">经历:</td>
+            <td class="">
+              <%= experience %>
+            </td>
+          </tr>
+          <tr>
+             <td>修改头像:</td>
+              <td class="" >
+                <form action="/users/myselfinfo/touxiang" method="post" enctype="multipart/form-data" id="uploadForm">
+                  <p><input type="file" name="upload" style="display: inline-block"> <input type="submit" value="上传"  style="display: inline-block"/></p>
+                </form>
+              </td>
+            </tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</body>
+<script>
+$('#uploadForm').submit(function(){
+  if($(this).find('input[name=upload]').val() == ''){
+    $('#uploadMsg').text('您还没有选择图片，请先选择').show();
+    return false;
+  }
+});
+$('#uploadMsg').click(function(){
+  $('#uploadMsg').hide();
+});
+
+</script>
+</html>

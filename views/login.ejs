@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<%-include('header.ejs')-%>
+
+<link rel='stylesheet' href='/stylesheets/login.css' />
+<body>
+    <%-include('header-list.ejs')-%>
+  <div class="container">
+    <div class="login">
+      <form class="form-horizontal" action="/login" method="post">
+        <div class="form-group">
+          <label for="username" class="col-sm-2 control-label">用户名:</label>
+          <div class="col-sm-7">
+            <input type="text" class="form-control" id="username" name="username" placeholder="username">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password" class="col-sm-2 control-label">密码:</label>
+          <div class="col-sm-7">
+            <input type="password" class="form-control" id="password" name="password" placeholder="password">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="validcode" class="col-sm-2 control-label">验证码:</label>
+          <div class="col-sm-8">
+            <div class="row">
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="validcode" name="validcode" placeholder="validcode">
+              </div>
+              <div class="col-sm-6">
+                <img src="/login/captchapng" title="点击切换" onclick="this.src='/login/captchapng?t='+Math.random()" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">登录</button>
+          </div>
+        </div>
+      </form>
+
+
+    </div>
+
+
+  </div>
+
+</body>
+
+</html>

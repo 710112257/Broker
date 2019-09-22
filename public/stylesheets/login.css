@@ -1,0 +1,14 @@
+.container{
+ width: 100%;
+}
+body{
+    background-image:url("/images/loginbc.jpg") ;
+}
+.login{
+    background-color: rgba(222, 255, 179, 0.374);
+    width: 500px;  
+    height: 300px; 
+    margin:200px auto;
+    padding-left:40px;
+    padding-top:50px;  
+}

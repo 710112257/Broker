@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+<%-include('header.ejs')-%>
+
+
+<body class="user-select">
+  <section class="container-fluid">
+    <%-include('header-list.ejs')-%>
+    <div class="row">
+      <%-include('sidebar.ejs')-%>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
+        <div class="row">
+          <form action="/users/article/add-article" method="post" class="add-article-form " id="uploadForm" enctype="multipart/form-data">
+            <div class="col-md-9">
+              <h1 class="page-header">撰写新文章</h1>
+              <!--错误警告框-->
+              <div class="alert alert-danger alert-dismissible" style="display: none;" id="uploadMsg">请选择一张图片
+              </div>
+              <div class="form-group">
+                <label for="title" class="sr-only">标题</label>
+                <input type="text" id="title" name="title" class="form-control" placeholder="在此处输入标题">
+              </div>
+              <div class="add-article-box">
+                <h2 class="add-article-box-title"><span>正文</span></h2>
+                <div class="add-article-box-content">
+                  <textarea class="form-control" name="content" id="content" style="height: 300px;"></textarea>
+                </div>
+              </div>
+              <div class="add-article-box">
+                <h2 class="add-article-box-title"><span>关键字</span></h2>
+                <div class="add-article-box-content">
+                  <input type="text" class="form-control" placeholder="请输入关键字" name="keywords">
+                  <span class="prompt-text">多个标签请用英文逗号,隔开。</span>
+                </div>
+              </div>
+              <div class="add-article-box">
+                <h2 class="add-article-box-title"><span>描述</span></h2>
+                <div class="add-article-box-content">
+                  <textarea class="form-control" name="describe"></textarea>
+                  <span class="prompt-text">描述是可选的手工创建的内容总结，并可以在网页描述中使用</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <h1 class="page-header">操作</h1>
+              <div class="add-article-box">
+                <h2 class="add-article-box-title"><span>栏目</span></h2>
+                <div class="add-article-box-content">
+                  <ul class="category-list">
+                    <li>
+                      <label>
+                        <input name="category" type="radio" value="1" checked>
+                        这是栏目一 <em class="hidden-md">( 栏目ID: <span>1</span> )</em></label>
+                    </li>
+                    <li>
+                      <label>
+                        <input name="category" type="radio" value="2">
+                        这是栏目二 <em class="hidden-md">( 栏目ID: <span>2</span> )</em></label>
+                    </li>
+                    <li>
+                      <label>
+                        <input name="category" type="radio" value="3">
+                        这是栏目三 <em class="hidden-md">( 栏目ID: <span>3</span> )</em></label>
+                    </li>
+                    <li>
+                      <label>
+                        <input name="category" type="radio" value="4">
+                        这是栏目四 <em class="hidden-md">( 栏目ID: <span>4</span> )</em></label>
+                    </li>
+                    <li>
+                      <label>
+                        <input name="category" type="radio" value="5">
+                        这是栏目五 <em class="hidden-md">( 栏目ID: <span>5</span> )</em></label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="add-article-box">
+                <h2 class="add-article-box-title"><span>标签</span></h2>
+                <div class="add-article-box-content">
+                  <input type="text" class="form-control" placeholder="输入新标签" name="tags">
+                  <span class="prompt-text">多个标签请用英文逗号,隔开</span> </div>
+              </div>
+              <div class="add-article-box">
+                <h2 class="add-article-box-title"><span>标题图片</span></h2>
+                <div class="add-article-box-content">
+                  <input type="file" class="form-control" placeholder="点击按钮选择图片" name="upload" style="border: none">
+                </div>
+              </div>
+              <div class="add-article-box">
+                <h2 class="add-article-box-title"><span>发布</span></h2>
+                <div class="add-article-box-content">
+                  <p><label>公开度：</label><input type="radio" name="visibility" value="公开" checked />公开 <input type="radio"
+                      name="visibility" value="私密" />私密</p>
+                  <p><label>发布于：</label><span class="article-time-display"><input type="datetime" name="time" value="未发布" /></span></p>
+                </div>
+                <div class="add-article-box-footer">
+                  <button class="btn btn-primary" type="submit">发布</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+<script>
+  $('#uploadForm').submit(function () {
+    if($(this).find('#title').val().replace(/(^\s*)||(\s*$)/,'')==''){
+      $('#uploadMsg').text('请输入文章题目').show();
+      return false;
+    }
+    if($(this).find('#content').val().replace(/(^\s*)||(\s*$)/,'')==''){
+      $('#uploadMsg').text('请输入内容').show();
+      return false;
+    }
+    if($(this).find('input[name=keywords]').val().replace(/(^\s*)||(\s*$)/,'')==''){
+      $('#uploadMsg').text('请输入关键词').show();
+      return false;
+    }
+    if($(this).find('textarea[name=describe]').val().replace(/(^\s*)||(\s*$)/,'')==''){
+      $('#uploadMsg').text('请输入描述').show();
+      return false;
+    }
+    if($(this).find('input[name=tags]').val().replace(/(^\s*)||(\s*$)/,'')==''){
+      $('#uploadMsg').text('请输入标签').show();
+      return false;
+    }
+    if($(this).find('input[name=upload]').val() == ''){
+      $('#uploadMsg').text('请选择一张标题图片').show();
+      return false;
+    }
+  });
+  $('#uploadMsg').click(function () {
+    $('#uploadMsg').hide();
+  });
+
+</script>
+
+</html>

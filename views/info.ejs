@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%-include('header.ejs')-%>
+<style>
+  .btn-answer-css:hover{
+  color: blue;
+}
+</style>
+
+<body>
+  <%-include('header-list.ejs')-%>
+  <article>
+    <h1 class="t_nav"><span>您现在的位置是：首页 > 文章浏览 >
+        <%= article.title%></span><a href="/" class="n1">网站首页</a><a href="/" class="n2">慢生活</a></h1>
+    <div class="infos">
+      <div class="newsview">
+        <h3 class="news_title">
+          <%= article.title%>
+        </h3>
+        <div class="news_author"><span class="au01"><a href="mailto:dancesmiling@qq.com">
+              博主</a></span>
+          <span class="au02">
+            <%= article.time%></span>
+          <span class="au03">共<b>
+              <%=article.count%></b>人围观</span></div>
+        <div class="tags"><a href="/e/tags/?tagname=%B8%F6%C8%CB%B2%A9%BF%CD&amp;tempid=13" target="_blank">个人博客</a>
+          &nbsp; <a href="/e/tags/?tagname=%D0%A1%CA%C0%BD%E7&amp;tempid=13" target="_blank">小世界'</a></div>
+        <div class="news_about"><strong>简介</strong>
+          <%=article.describe%>
+        </div>
+        <div class="content">
+          <%= article.content%>
+          </divicle>
+
+
+
+        </div>
+        <div class="share"> </div>
+        <div class="nextinfo">
+          <p>上一篇：<a href="/news/life/2018-03-13/804.html">作为一个设计师,如果遭到质疑你是否能恪守自己的原则?</a></p>
+          <p>下一篇：<a href="/news/life/">返回列表</a></p>
+        </div>
+        <div class="otherlink">
+          <h2>相关文章</h2>
+          <ul>
+            <li><a href="/download/div/2018-04-22/815.html" title="html5个人博客模板《黑色格调》">html5个人博客模板《黑色格调》</a></li>
+            <li><a href="/download/div/2018-04-18/814.html" title="html5个人博客模板主题《清雅》">html5个人博客模板主题《清雅》</a></li>
+            <li><a href="/download/div/2018-03-18/807.html" title="html5个人博客模板主题《绅士》">html5个人博客模板主题《绅士》</a></li>
+            <li><a href="/download/div/2018-02-22/798.html" title="html5时尚个人博客模板-技术门户型">html5时尚个人博客模板-技术门户型</a></li>
+            <li><a href="/download/div/2017-09-08/789.html" title="html5个人博客模板主题《心蓝时间轴》">html5个人博客模板主题《心蓝时间轴》</a></li>
+            <li><a href="/download/div/2017-07-16/785.html" title="古典个人博客模板《江南墨卷》">古典个人博客模板《江南墨卷》</a></li>
+            <li><a href="/download/div/2017-07-13/783.html" title="古典风格-个人博客模板">古典风格-个人博客模板</a></li>
+            <li><a href="/download/div/2015-06-28/748.html" title="个人博客《草根寻梦》—手机版模板">个人博客《草根寻梦》—手机版模板</a></li>
+            <li><a href="/download/div/2015-04-10/746.html" title="【活动作品】柠檬绿兔小白个人博客模板">【活动作品】柠檬绿兔小白个人博客模板</a></li>
+            <li><a href="/jstt/bj/2015-01-09/740.html" title="【匆匆那些年】总结个人博客经历的这四年…">【匆匆那些年】总结个人博客经历的这四年…</a></li>
+          </ul>
+        </div>
+        <div class="news_pl" style="width:100%">
+          <h2>文章评论<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#comment-send"
+              style="margin-left:580px">点击评论</button></h2>
+
+          <% if(comment){%>
+          <% comment.forEach(function (stu,i){%>
+          <table class="table table-comment" style="background-color:rgb(255, 255, 255);border: 1px solid rgb(0, 0, 0);font-size: 8px">
+            <tr style="background-color:rgb(0, 0, 0);color: white">
+              <td style="width:100px">名称：</td>
+              <td>
+                <p style="display:inline-block;width:200px;margin: 0"> id：
+                  <%= stu.ip%>
+                </p>
+                <p style="display:inline-block;width:200px;margin: 0">
+                  <%= stu.time%>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>内容：</td>
+              <td>
+                <p>
+                  <%= stu.comment%>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2"><button type="button" class="btn btn-answer btn-xs btn-answer-css" data-toggle="modal"
+                  data-target="#comment-answer" value="<%= stu._id%>">点击回复</button></td>
+            </tr>
+            <% if(answers){%>
+            <% answers.forEach(function (ans,j){%>
+            <% if(ans.commentid==stu._id){%>
+            <tr style="color:blue">
+              <td>
+                <%=ans.ip%>回复：</td>
+              <td>
+
+                <%=ans.answer%></br>
+                <small style="color:rgb(192, 192, 192)">(
+                  <%=ans.time%>)</small>
+              </td>
+            </tr>
+            <% }%>
+            <% })%>
+            <% }%>
+          </table>
+          <% })%>
+          <% }%>
+        </div>
+        <!--下面是模态框-->
+        <div class="modal fade bs-example-modal-lg" id="comment-send" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">随便说点</h4>
+              </div>
+
+              <div class="modal-body">
+                <div class="add-article-box">
+                  <h2 class="add-article-box-title"><span>speaking...</span></h2>
+                  <div class="add-article-box-content">
+                    <input type="hidden" name="id" class="article-id" value="<%= article._id%>">
+                    <input type="hidden" name="id" class="article-title" value="<%= article.title%>">
+                    <textarea class="form-control people-comment" name="comment" id="comment" style="height: 300px;"></textarea>
+                  </div>
+                </div>
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary btn-sure">确定</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--下面是模态框(回复)-->
+        <div class="modal fade bs-example-modal-lg" id="comment-answer" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">回复</h4>
+              </div>
+
+              <div class="modal-body">
+                <div class="add-article-box">
+                  <h2 class="add-article-box-title"><span>answer...</span></h2>
+                  <div class="add-article-box-content">
+                    <input type="hidden" name="id" class="article-id" value="<%= article._id%>">
+                    <input type="hidden" name="id" class="answer-article-id" value="">
+                    <textarea class="form-control people-answer" name="answer" id="answer" style="height: 300px;"></textarea>
+                  </div>
+                </div>
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary btn-sure-answer">确定</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar">
+      <div class="search">
+        <form action="/e/search/index.php" method="post" name="searchform" id="searchform">
+          <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);"
+            onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}"
+            type="text">
+          <input name="show" value="title" type="hidden">
+          <input name="tempid" value="1" type="hidden">
+          <input name="tbname" value="news" type="hidden">
+          <input name="Submit" class="input_submit" value="搜索" type="submit">
+        </form>
+      </div>
+      <div class="lmnav">
+        <h2 class="hometitle">栏目导航</h2>
+        <ul class="navbor">
+          <li><a href="#">关于我</a></li>
+          <li><a href="share.html">模板分享</a>
+            <ul>
+              <li><a href="list.html">个人博客模板</a></li>
+              <li><a href="#">HTML5模板</a></li>
+            </ul>
+          </li>
+          <li><a href="list.html">学无止境</a>
+            <ul>
+              <li><a href="list.html">学习笔记</a></li>
+              <li><a href="#">HTML5+CSS3</a></li>
+              <li><a href="#">网站建设</a></li>
+            </ul>
+          </li>
+          <li><a href="#">慢生活</a></li>
+        </ul>
+      </div>
+      <div class="paihang">
+        <h2 class="hometitle">点击排行</h2>
+        <ul>
+          <li><b><a href="/download/div/2015-04-10/746.html" target="_blank">【活动作品】柠檬绿兔小白个人博客模板30...</a></b>
+            <p><i><img src="images/t02.jpg"></i>展示的是首页html，博客页面布局格式简单，没有复杂的背景，色彩局部点缀，动态的幻灯片展示，切换卡，标...</p>
+          </li>
+          <li><b><a href="/download/div/2014-02-19/649.html" target="_blank"> 个人博客模板（2014草根寻梦）30...</a></b>
+            <p><i><img src="images/b03.jpg"></i>2014第一版《草根寻梦》个人博客模板简单、优雅、稳重、大气、低调。专为年轻有志向却又低调的草根站长设...</p>
+          </li>
+          <li><b><a href="/download/div/2013-08-08/571.html" target="_blank">黑色质感时间轴html5个人博客模板30...</a></b>
+            <p><i><img src="images/b04.jpg"></i>黑色时间轴html5个人博客模板颜色以黑色为主色，添加了彩色作为网页的一个亮点，导航高亮显示、banner图片...</p>
+          </li>
+          <li><b><a href="/download/div/2014-09-18/730.html" target="_blank">情侣博客模板系列之《回忆》Html30...</a></b>
+            <p><i><img src="images/b05.jpg"></i>Html5+css3情侣博客模板，主题《回忆》，使用css3技术实现网站动画效果，主题《回忆》,分为四个主要部分，...</p>
+          </li>
+          <li><b><a href="/download/div/2014-04-17/661.html" target="_blank">黑色Html5个人博客模板主题《如影随形》30...</a></b>
+            <p><i><img src="images/b06.jpg"></i>014第二版黑色Html5个人博客模板主题《如影随形》，如精灵般的影子会给人一种神秘的感觉。一张剪影图黑白...</p>
+          </li>
+          <li><b><a href="/jstt/bj/2015-01-09/740.html" target="_blank">【匆匆那些年】总结个人博客经历的这四年…30...</a></b>
+            <p><i><img src="images/mb02.jpg"></i>博客从最初的域名购买，到上线已经有四年的时间了，这四年的时间，有笑过，有怨过，有悔过，有执着过，也...</p>
+          </li>
+        </ul>
+      </div>
+      <div class="cloud">
+        <h2 class="hometitle">标签云</h2>
+        <ul>
+          <a href="/">陌上花开</a> <a href="/">校园生活</a> <a href="/">html5</a> <a href="/">SumSung</a> <a href="/">青春</a>
+          <a href="/">温暖</a> <a href="/">阳光</a> <a href="/">三星</a><a href="/">索尼</a> <a href="/">华维荣耀</a> <a href="/">三星</a>
+          <a href="/">索尼</a>
+        </ul>
+      </div>
+      <div class="paihang">
+        <h2 class="hometitle">站长推荐</h2>
+        <ul>
+          <li><b><a href="/download/div/2015-04-10/746.html" target="_blank">【活动作品】柠檬绿兔小白个人博客模板30...</a></b>
+            <p><i><img src="images/t02.jpg"></i>展示的是首页html，博客页面布局格式简单，没有复杂的背景，色彩局部点缀，动态的幻灯片展示，切换卡，标...</p>
+          </li>
+          <li><b><a href="/download/div/2014-02-19/649.html" target="_blank"> 个人博客模板（2014草根寻梦）30...</a></b>
+            <p><i><img src="images/b03.jpg"></i>2014第一版《草根寻梦》个人博客模板简单、优雅、稳重、大气、低调。专为年轻有志向却又低调的草根站长设...</p>
+          </li>
+          <li><b><a href="/download/div/2013-08-08/571.html" target="_blank">黑色质感时间轴html5个人博客模板30...</a></b>
+            <p><i><img src="images/b04.jpg"></i>黑色时间轴html5个人博客模板颜色以黑色为主色，添加了彩色作为网页的一个亮点，导航高亮显示、banner图片...</p>
+          </li>
+          <li><b><a href="/download/div/2014-09-18/730.html" target="_blank">情侣博客模板系列之《回忆》Html30...</a></b>
+            <p><i><img src="images/b05.jpg"></i>Html5+css3情侣博客模板，主题《回忆》，使用css3技术实现网站动画效果，主题《回忆》,分为四个主要部分，...</p>
+          </li>
+          <li><b><a href="/download/div/2014-04-17/661.html" target="_blank">黑色Html5个人博客模板主题《如影随形》30...</a></b>
+            <p><i><img src="images/b06.jpg"></i>014第二版黑色Html5个人博客模板主题《如影随形》，如精灵般的影子会给人一种神秘的感觉。一张剪影图黑白...</p>
+          </li>
+          <li><b><a href="/jstt/bj/2015-01-09/740.html" target="_blank">【匆匆那些年】总结个人博客经历的这四年…30...</a></b>
+            <p><i><img src="images/mb02.jpg"></i>博客从最初的域名购买，到上线已经有四年的时间了，这四年的时间，有笑过，有怨过，有悔过，有执着过，也...</p>
+          </li>
+        </ul>
+      </div>
+      <div class="weixin">
+        <h2 class="hometitle">官方微信</h2>
+        <ul>
+          <img src="images/wx.jpg">
+        </ul>
+      </div>
+      <div class="ad" id="left_flow2"> <img src="images/ad.jpg"> </div>
+    </div>
+  </article>
+  <footer>
+    <p>Design by <a href="/">杨青个人博客</a> <a href="/">蜀ICP备11002373号-1</a></p>
+  </footer>
+</body>
+<script>
+  //判断非空输入
+  var Reg = new RegExp('/\S/');
+  $('.btn-sure').on('click', function () {
+    if ($('.people-comment').val().replace(/(^\s*)||(\s*$)/,'') == "") {
+      alert('不准什么都不说~');
+      return false;
+    }
+    $.post('/info/comment', { id: $('.article-id').val(), comment: $('.people-comment').val(), title: $('.article-title').val() }, function () {
+      console.log('OK');
+
+    });
+    alert('评论成功');
+    document.location.reload();
+  })
+  $('.table-comment').on('click', '.btn-answer', function () {
+    $('.answer-article-id').val($(this).val());
+
+  })
+
+  $('.btn-sure-answer').on('click', function () {
+    if ($('.people-answer').val().replace(/(^\s*)||(\s*$)/,'') == "") {
+      alert('不准什么都不说~');
+      return false;
+    }
+    $.post('/info/answer', { id: $('.article-id').val(), answer: $('.people-answer').val(), commentid: $('.answer-article-id').val(), title: $('.article-title').val() }, function () {
+      console.log('OK');
+
+    });
+    alert('回复成功');
+    document.location.reload();
+  })
+
+</script>
+
+</html>

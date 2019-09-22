@@ -1,0 +1,17 @@
+#main{
+    column-count:3;
+}
+.box{
+    break-inside: avoid;
+    padding: 15px 7px 0px 7px;
+}
+
+.pic img{
+    width: 100%;
+}
+
+@media  (max-width:500px ) {
+    #main{
+        column-count:2;
+    }
+}

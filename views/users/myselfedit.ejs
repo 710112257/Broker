@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<%-include('header.ejs')-%>
+<link rel="stylesheet" href="/stylesheets/users/meselfinfo.css">
+<body class="user-select">
+  <section class="container-fluid">
+    <%-include('header-list.ejs')-%>
+    <div class="row">
+      <%-include('sidebar.ejs')-%>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
+          <form class="form-horizontal" method="POST" action="/users/myselfinfo/edit"  >
+          <h1 class="page-header">个人信息中心 </h1>
+          <div class="form-group">
+            <label for="onlinename" class="col-sm-2 control-label">网名</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="onlinename" name="onlinename" placeholder="onlinename" value="<%= onlinename %>">
+
+            </div>
+          </div>
+        
+          <div class="form-group">
+            <label for="sex" class="col-sm-2 control-label">性别</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="sex" name="sex" placeholder="sex" value="<%= sex %>">
+            </div>
+          </div>
+        
+          <div class="form-group">
+            <label for="profess" class="col-sm-2 control-label">职业</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="profess" name="profess" placeholder="profess" value="<%= profess %>">
+            </div>
+          </div>
+       
+          <div class="form-group">
+            <label for="wechatNumber" class="col-sm-2 control-label">个人微信号</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="wechatNumber" name="wechatNumber" placeholder="wechatNumber" value="<%= wechatNumber %>" >
+            </div>
+          </div>
+        
+          <div class="form-group">
+            <label for="email" class="col-sm-2 control-label">邮箱</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="email"  name="email" placeholder="email" value="<%= email %>">
+            </div>
+          </div>
+        
+          <div class="form-group">
+            <label for="myselfsimple" class="col-sm-2 control-label">个人简介</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" rows="6" id="myselfsimple" name="myselfsimple" placeholder="myselfsimple"><%= myselfsimple %></textarea>
+            </div>
+          </div>
+      
+          <div class="form-group">
+            <label for="experience" class="col-sm-2 control-label">经历</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" rows="6" id="experience" name="experience" placeholder="experience"><%= experience %></textarea>
+            </div>
+          </div>
+       
+          <div class="form-group">
+            <div class="col-sm-offset-5 col-sm-3">
+              <button type="submit" class="btn btn-default">提交修改</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</body>
+
+</html>
